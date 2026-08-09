@@ -1,0 +1,14 @@
+*{box-sizing:border-box}html,body{margin:0;background:#08080d;color:#f5f5f7;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;min-height:100%}
+body{background:radial-gradient(circle at top,#201633 0,#0b0b12 38%,#07070b 100%);min-height:100vh}
+.app{max-width:720px;margin:0 auto;padding:calc(env(safe-area-inset-top) + 22px) 18px calc(env(safe-area-inset-bottom) + 28px)}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:28px}
+.brand{display:flex;align-items:center;gap:12px}.brand h1{font-size:22px;margin:0 0 3px}.brand p{margin:0;color:#a6a6b3;font-size:13px}
+.shield{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(145deg,#7c4dff,#b83cff);box-shadow:0 10px 30px #8d45ff42;font-size:22px}
+button,input{font:inherit}.ghost,.secondary,.go,.actions button{border:0;border-radius:14px}
+.ghost{background:#ffffff12;color:#fff;padding:10px 14px}.searchCard{background:#13131b;border:1px solid #ffffff12;border-radius:24px;padding:18px;box-shadow:0 18px 60px #0008}
+label{display:block;font-size:13px;color:#aaaabd;margin:0 0 9px}.addressRow{display:flex;gap:10px}
+input{min-width:0;flex:1;background:#0b0b12;color:#fff;border:1px solid #ffffff16;border-radius:14px;padding:15px 14px;outline:none}
+input:focus{border-color:#9b62ff;box-shadow:0 0 0 3px #9b62ff22}.go{background:linear-gradient(145deg,#8f5cff,#bb4dff);color:#fff;font-weight:700;padding:0 18px}
+.actions{display:grid;grid-template-columns:1fr;gap:10px;margin-top:16px}.actions button{padding:14px 16px;background:#7e4cf2;color:white;font-weight:700}
+.actions .secondary{background:#23232f;color:#f5f5f7}.info{margin-top:24px;padding:4px 4px}.info h2{font-size:17px;margin-bottom:8px}.info p{color:#a8a8b5;line-height:1.5;font-size:14px}
+@media(min-width:600px){.actions{grid-template-columns:1fr 1fr}}

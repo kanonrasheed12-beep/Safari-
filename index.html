@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#0b0b10" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Private Browser" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="style.css" />
+  <title>Private Browser</title>
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="shield">◉</div>
+        <div>
+          <h1>Private Browser</h1>
+          <p>Safari-powered private launcher</p>
+        </div>
+      </div>
+      <button id="clearBtn" class="ghost" type="button">Clear</button>
+    </header>
+
+    <section class="searchCard">
+      <form id="searchForm">
+        <label for="address">Search or enter website</label>
+        <div class="addressRow">
+          <input id="address" inputmode="url" autocomplete="off" autocapitalize="none"
+                 placeholder="example.com or search terms" />
+          <button class="go" type="submit">Go</button>
+        </div>
+      </form>
+
+      <div class="actions">
+        <button id="privateSafariBtn" type="button">Open Safari Private Browsing</button>
+        <button id="duckBtn" class="secondary" type="button">DuckDuckGo</button>
+      </div>
+    </section>
+
+    <section class="info">
+      <h2>Privacy notes</h2>
+      <p>This app does not save your searches or browsing history itself. Websites you open are handled by Safari.</p>
+      <p>For the strongest local privacy, tap <strong>Open Safari Private Browsing</strong>, then browse from Safari's Private tab group.</p>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
