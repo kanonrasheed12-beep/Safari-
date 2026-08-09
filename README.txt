@@ -1,41 +1,55 @@
-Private Browser v2 — Persistent Tabs PWA
+Private Browser v3 — Browser-Style PWA
 
-WHAT CHANGED
-- Multiple tabs.
-- New Tab (+) button.
-- Close individual tabs.
-- Switch between open tabs.
-- Open tabs are stored in localStorage and restored after the Home Screen app is closed/reopened.
-- The active tab is restored too.
-- Duplicate tab.
-- Close other tabs.
-- "Erase All" is separate from normal tab closing.
-- DuckDuckGo remains the default search engine.
-- In-app iframe viewer for websites that allow embedding.
-- "Open page" fallback for websites that block iframe embedding.
+NEW IN V3
+- Persistent multiple tabs.
+- App-managed Back and Forward history.
+- Refresh button.
+- New-tab Home button.
+- Bookmark / unbookmark current page.
+- Bookmark manager.
+- Tab overview cards.
+- Search engine selector:
+  - DuckDuckGo
+  - Brave Search
+  - Startpage
+- Website favicons using DuckDuckGo's public icon service.
+- Better URL/search-derived tab titles.
+- Duplicate current tab.
+- Close all other tabs.
+- Fire button:
+  - closes all tabs
+  - clears this app's browser session
+  - keeps bookmarks and selected search engine
+- Full "Erase App Data" option:
+  - removes tabs
+  - removes bookmarks
+  - resets search-engine preference
+- Automatic migration from the v2 tab list when possible.
 
-HOW TO UPDATE GITHUB
-1. Back up your current files.
-2. Replace:
+INSTALL / UPDATE ON GITHUB PAGES
+1. Back up the old files in your repository.
+2. Replace these files:
    - index.html
    - style.css
    - app.js
    - manifest.webmanifest
-3. Commit and push the changes.
-4. Wait for GitHub Pages to redeploy.
-5. On iPhone, fully close the Home Screen app and reopen it.
-6. If the old version is cached, remove the Home Screen icon, open the GitHub Pages URL in Safari, then Add to Home Screen again.
+   - README.txt
+3. Commit/push to GitHub.
+4. Let GitHub Pages redeploy.
+5. Fully close the iPhone Home Screen app and reopen it.
+6. If iOS keeps an old cached copy, remove the Home Screen icon, reopen the GitHub Pages URL in Safari, then Add to Home Screen again.
 
-IMPORTANT TECHNICAL LIMIT
-This remains a Progressive Web App, not a native iOS browser.
+IMPORTANT PWA LIMITATIONS
+This is still a Progressive Web App, not a native iOS browser.
 
-A normal website/PWA cannot reliably display every other website inside an iframe. Websites can block embedding using headers such as:
-- X-Frame-Options
-- Content-Security-Policy frame-ancestors
+1. Some websites refuse to render inside an iframe through X-Frame-Options or Content-Security-Policy frame-ancestors. Use "Open page" for those sites.
 
-That means the app can fully maintain and restore its own tab SESSION LIST, but some pages will need the "Open page" fallback instead of displaying inside the shell.
+2. Back/Forward tracks URLs navigated through this app's own controls. Because of browser same-origin security, this PWA cannot reliably inspect cross-origin links clicked inside an embedded page.
 
-For true DuckDuckGo-style browsing — arbitrary pages, accurate per-tab navigation history, back/forward state, independent web views, reliable website rendering, and native browser controls — the next version should be a native iOS app using Swift + WKWebView rather than a GitHub Pages PWA.
+3. A website cannot erase another website's Safari cookies/storage. The Fire button clears this PWA's own tab/session state, not arbitrary third-party site data.
 
-PRIVACY NOTE
-Persistent tabs require saving the open tab URLs locally on the device. "Erase All" removes that saved tab-session data.
+4. Cross-origin page titles cannot be read reliably. Titles are derived from search terms or website hostnames.
+
+5. Favicons use DuckDuckGo's icon endpoint. This means the hostname is requested from DuckDuckGo when the icon is displayed.
+
+For full DuckDuckGo-style behavior — independent WKWebView tabs, native back/forward history, arbitrary website compatibility, website process isolation, native download handling, full tab snapshots, and stronger per-tab controls — build a native iOS version with Swift/WKWebView.

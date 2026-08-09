@@ -12,59 +12,113 @@
 }
 html,body{margin:0;min-height:100%;background:var(--bg);color:#f5f5f7;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif}
 body{background:radial-gradient(circle at top,#201633 0,#0b0b12 34%,#07070b 100%);min-height:100vh}
-button,input{font:inherit}
+button,input,select{font:inherit}
 button{-webkit-tap-highlight-color:transparent}
-.app{max-width:900px;margin:0 auto;padding:calc(env(safe-area-inset-top) + 14px) 12px calc(env(safe-area-inset-bottom) + 84px)}
+button:disabled{opacity:.3}
+.app{max-width:920px;margin:0 auto;padding:calc(env(safe-area-inset-top) + 14px) 12px calc(env(safe-area-inset-bottom) + 86px)}
 .topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:12px;padding:0 4px}
 .brand{display:flex;align-items:center;gap:10px;min-width:0}
 .brand h1{font-size:19px;margin:0 0 2px;white-space:nowrap}
-.brand p{margin:0;color:#a6a6b3;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brand p{margin:0;color:#a6a6b3;font-size:12px}
 .shield{width:38px;height:38px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(145deg,#7c4dff,#b83cff);box-shadow:0 8px 24px #8d45ff38;font-size:20px}
-.iconBtn,.toolBtn{border:1px solid var(--line);background:#ffffff0d;color:#fff;border-radius:12px;min-width:42px;height:42px}
+.iconBtn,.navBtn,.roundBtn{border:1px solid var(--line);background:#ffffff0d;color:#fff;border-radius:12px;min-width:40px;height:40px}
 .browserShell{background:#0e0e15;border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 20px 70px #0008}
-.toolbar{display:flex;gap:8px;align-items:center;padding:10px;background:#111119;border-bottom:1px solid var(--line)}
-.addressForm{display:flex;gap:7px;min-width:0;flex:1}
-.addressForm input,.startSearch input{min-width:0;flex:1;background:#07070d;color:#fff;border:1px solid #ffffff18;border-radius:12px;padding:12px 12px;outline:none}
+.navRow{display:flex;gap:6px;align-items:center;padding:9px;background:#111119;border-bottom:1px solid var(--line)}
+.navBtn{font-size:22px;padding:0}
+.navBtn.star{font-size:20px}
+.navBtn.bookmarked{color:#ffd76a}
+.navBtn.plus{font-size:22px}
+.addressForm{display:flex;gap:6px;min-width:0;flex:1}
+.addressForm input,.startSearch input{min-width:0;flex:1;background:#07070d;color:#fff;border:1px solid #ffffff18;border-radius:12px;padding:11px 12px;outline:none}
 .addressForm input:focus,.startSearch input:focus{border-color:#9b62ff;box-shadow:0 0 0 3px #9b62ff20}
-.go,.startSearch button{border:0;border-radius:12px;background:linear-gradient(145deg,var(--purple),var(--purple2));color:white;font-weight:750;padding:0 15px}
-.plus{font-size:22px}
+.go,.startSearch button,.primaryWide{border:0;border-radius:12px;background:linear-gradient(145deg,var(--purple),var(--purple2));color:white;font-weight:750;padding:0 14px}
 .tabsBar{display:flex;gap:7px;overflow-x:auto;padding:8px 10px;background:#0b0b11;border-bottom:1px solid var(--line);scrollbar-width:none}
 .tabsBar::-webkit-scrollbar{display:none}
 .tab{display:flex;align-items:center;flex:0 0 174px;max-width:174px;background:#171720;border:1px solid transparent;border-radius:11px;overflow:hidden}
 .tab.active{background:#232331;border-color:#9b62ff66}
-.tabSelect{display:flex;align-items:center;gap:7px;min-width:0;flex:1;border:0;background:transparent;color:#ddd;padding:9px 7px 9px 9px;text-align:left}
-.favicon{width:22px;height:22px;flex:0 0 22px;border-radius:7px;display:grid;place-items:center;background:#323242;color:#cdb8ff;font-size:11px;font-weight:800}
+.tabSelect{display:flex;align-items:center;gap:7px;min-width:0;flex:1;border:0;background:transparent;color:#ddd;padding:8px 7px 8px 9px;text-align:left}
+.siteIcon{width:22px;height:22px;flex:0 0 22px;border-radius:7px;display:grid;place-items:center;background:#323242;color:#cdb8ff;font-size:11px;font-weight:800;overflow:hidden}
+.siteIcon img{width:100%;height:100%;object-fit:cover}
+.siteIcon.large{width:34px;height:34px;flex-basis:34px;border-radius:10px;font-size:14px}
+.siteIcon.previewIcon{width:54px;height:54px;flex-basis:54px;border-radius:16px;font-size:22px}
 .tabLabel{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px}
 .tabClose{width:31px;align-self:stretch;border:0;background:transparent;color:#9292a0;font-size:19px}
-.tabClose:active{background:#ffffff0c;color:#fff}
-.startPage{min-height:520px;padding:56px 18px 28px;display:flex;flex-direction:column;align-items:center}
+.startPage{min-height:520px;padding:46px 18px 28px;display:flex;flex-direction:column;align-items:center}
 .hero{text-align:center;max-width:520px}
-.heroIcon{width:72px;height:72px;border-radius:24px;margin:0 auto 18px;display:grid;place-items:center;font-size:32px;background:linear-gradient(145deg,#7c4dff,#b83cff);box-shadow:0 16px 50px #8d45ff40}
-.hero h2{font-size:27px;margin:0 0 10px}
+.heroIcon{width:68px;height:68px;border-radius:23px;margin:0 auto 16px;display:grid;place-items:center;font-size:30px;background:linear-gradient(145deg,#7c4dff,#b83cff);box-shadow:0 16px 50px #8d45ff40}
+.hero h2{font-size:26px;margin:0 0 9px}
 .hero p{font-size:14px;line-height:1.55;color:#aaaabd;margin:0}
-.startSearch{display:flex;width:min(100%,560px);gap:8px;margin-top:30px}
-.startSearch input{padding:15px 14px}
+.startSearch{display:flex;width:min(100%,560px);gap:8px;margin-top:26px}
+.startSearch input{padding:14px}
+.engineRow{display:flex;align-items:center;justify-content:space-between;width:min(100%,560px);gap:12px;margin-top:12px;color:#aaaabd;font-size:12px}
+.engineRow select{border:1px solid var(--line);border-radius:10px;background:#181821;color:#fff;padding:9px 30px 9px 10px}
 .quickLinks{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;width:min(100%,560px);margin-top:14px}
 .quickLinks button{border:1px solid var(--line);border-radius:13px;background:#181821;color:#eee;padding:13px 8px;font-weight:650}
-.privacyCard{width:min(100%,560px);margin-top:32px;padding:17px;border:1px solid #9b62ff28;border-radius:16px;background:#8f5cff0e}
+.bookmarkSection{width:min(100%,560px);margin-top:30px}
+.sectionHeading{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.sectionHeading h3{margin:0;font-size:15px}
+.sectionHeading button{border:0;background:transparent;color:#b99aff;font-size:12px;font-weight:700}
+.bookmarksGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.bookmarkTile{display:flex;align-items:center;gap:10px;min-width:0;border:1px solid var(--line);background:#171720;color:#fff;border-radius:13px;padding:10px;text-align:left}
+.bookmarkText{min-width:0}
+.bookmarkText strong,.bookmarkText small{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bookmarkText strong{font-size:12px}
+.bookmarkText small{font-size:10px;color:#91919f;margin-top:3px}
+.emptyState{color:#858594;font-size:12px;text-align:center;padding:12px}
+.privacyCard{width:min(100%,560px);margin-top:26px;padding:16px;border:1px solid #9b62ff28;border-radius:16px;background:#8f5cff0e}
 .privacyCard strong{font-size:14px}
 .privacyCard p{color:#a8a8b6;font-size:12px;line-height:1.55;margin:7px 0 0}
 .viewer{min-height:560px;background:#fff;position:relative}
 .viewerNotice{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#181821;color:#c9c9d1;padding:8px 10px;font-size:11px}
 .viewerNotice span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .viewerNotice button{border:1px solid #ffffff18;border-radius:9px;background:#292936;color:#fff;padding:7px 9px;white-space:nowrap}
-#webFrame{display:block;width:100%;height:calc(100vh - 260px);min-height:500px;border:0;background:#fff}
-.bottomBar{position:fixed;z-index:30;left:50%;bottom:max(10px,env(safe-area-inset-bottom));transform:translateX(-50%);width:min(calc(100% - 24px),876px);display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:8px;background:#111119e8;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--line);border-radius:18px;box-shadow:0 16px 45px #0009}
+#webFrame{display:block;width:100%;height:calc(100vh - 265px);min-height:500px;border:0;background:#fff}
+.bottomBar{position:fixed;z-index:30;left:50%;bottom:max(10px,env(safe-area-inset-bottom));transform:translateX(-50%);width:min(calc(100% - 24px),896px);display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:8px;background:#111119e8;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--line);border-radius:18px;box-shadow:0 16px 45px #0009}
 .bottomBar button{border:0;border-radius:12px;background:#252532;color:white;padding:12px 8px;font-weight:700;font-size:13px}
-.bottomBar .danger{background:#3a1e25;color:#ff9ba3}
+.bottomBar .fire{background:linear-gradient(145deg,#ff7448,#d82b55)}
 .tabsIcon{margin-right:5px}
-.menu{position:fixed;z-index:50;inset:0;background:#0008;display:flex;flex-direction:column;justify-content:flex-end;padding:18px 18px max(18px,env(safe-area-inset-bottom))}
-.menu button{border:0;border-bottom:1px solid #ffffff10;background:#1c1c25;color:#fff;padding:16px;font-weight:650}
-.menu button:first-child{border-radius:16px 16px 0 0}
-.menu button:last-child{margin-top:8px;border-radius:16px;border-bottom:0;background:#292935}
+.overlay{position:fixed;z-index:60;inset:0;background:#000b;display:flex;align-items:flex-end;justify-content:center;padding:16px 12px max(16px,env(safe-area-inset-bottom))}
+.sheet,.actionSheet{width:min(100%,720px);max-height:85vh;overflow:auto;background:#12121a;border:1px solid var(--line);border-radius:22px;padding:16px;box-shadow:0 30px 100px #000}
+.sheetHeader{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+.sheetHeader h2{font-size:20px;margin:0 0 3px}
+.sheetHeader p{font-size:12px;color:#90909d;margin:0}
+.roundBtn{font-size:22px}
+.tabCards{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tabCard{position:relative;border:1px solid var(--line);border-radius:16px;background:#181821;overflow:hidden}
+.tabCard.active{border-color:#9b62ff88;box-shadow:0 0 0 2px #9b62ff18}
+.tabPreview{display:block;width:100%;border:0;background:transparent;color:#fff;padding:0;text-align:left}
+.fakeBrowserBar{display:flex;align-items:center;gap:7px;background:#22222d;padding:8px;color:#a8a8b4;font-size:10px}
+.fakeBrowserBar span:last-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.previewBody{height:112px;display:grid;place-items:center;background:linear-gradient(145deg,#101018,#252136)}
+.tabCardDetails{padding:10px 12px 13px}
+.tabCardDetails strong,.tabCardDetails small{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tabCardDetails strong{font-size:13px}
+.tabCardDetails small{font-size:10px;color:#8f8f9b;margin-top:4px}
+.cardClose{position:absolute;top:6px;right:6px;width:29px;height:29px;border:0;border-radius:50%;background:#09090dcc;color:#fff;font-size:18px}
+.primaryWide{width:100%;padding:14px;margin-top:14px}
+.bookmarkList{display:flex;flex-direction:column;gap:8px}
+.bookmarkRow{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:14px;background:#181821;padding:8px}
+.bookmarkOpen{display:flex;align-items:center;gap:10px;min-width:0;flex:1;border:0;background:transparent;color:#fff;text-align:left}
+.bookmarkOpen span:last-child{min-width:0}
+.bookmarkOpen strong,.bookmarkOpen small{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bookmarkOpen strong{font-size:13px}
+.bookmarkOpen small{font-size:10px;color:#91919f;margin-top:4px}
+.removeBookmark{border:0;border-radius:10px;background:#342029;color:#ff9aa3;padding:9px}
+.actionSheet{padding:8px}
+.actionSheet button{display:block;width:100%;border:0;border-bottom:1px solid #ffffff10;background:#1c1c25;color:#fff;padding:16px;font-weight:650}
+.actionSheet button:first-child{border-radius:16px 16px 0 0}
+.actionSheet .dangerText{color:#ff8e97}
+.actionSheet .cancel{margin-top:8px;border-radius:16px;border-bottom:0;background:#292935}
 .hidden{display:none!important}
-@media(min-width:700px){
-  .app{padding-left:18px;padding-right:18px}
-  .tab{flex-basis:205px;max-width:205px}
-  #webFrame{height:calc(100vh - 245px)}
+@media(max-width:620px){
+  .navRow{gap:4px;padding:7px}
+  .navBtn{min-width:34px;width:34px;height:38px;font-size:19px}
+  .addressForm{gap:4px}
+  .addressForm input{padding:10px 9px;font-size:13px}
+  .go{padding:0 11px;font-size:12px}
+  .tabCards{grid-template-columns:1fr}
+}
+@media(max-width:430px){
+  .bookmarksGrid{grid-template-columns:1fr}
+  .navRow .star{display:none}
 }

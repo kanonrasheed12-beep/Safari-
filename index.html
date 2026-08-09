@@ -19,15 +19,18 @@
         <div class="shield" aria-hidden="true">◉</div>
         <div>
           <h1>Private Browser</h1>
-          <p>Persistent private tab launcher</p>
+          <p>Persistent tab browser</p>
         </div>
       </div>
       <button id="menuBtn" class="iconBtn" type="button" aria-label="Browser menu">•••</button>
     </header>
 
     <section class="browserShell" aria-label="Browser">
-      <div class="toolbar">
-        <button id="homeBtn" class="toolBtn" type="button" aria-label="Home">⌂</button>
+      <div class="navRow">
+        <button id="backBtn" class="navBtn" type="button" aria-label="Back">‹</button>
+        <button id="forwardBtn" class="navBtn" type="button" aria-label="Forward">›</button>
+        <button id="refreshBtn" class="navBtn" type="button" aria-label="Refresh">↻</button>
+        <button id="homeBtn" class="navBtn" type="button" aria-label="New tab home">⌂</button>
 
         <form id="searchForm" class="addressForm">
           <input
@@ -42,7 +45,8 @@
           <button class="go" type="submit">Go</button>
         </form>
 
-        <button id="newTabBtn" class="toolBtn plus" type="button" aria-label="New tab">＋</button>
+        <button id="bookmarkBtn" class="navBtn star" type="button" aria-label="Bookmark current page">☆</button>
+        <button id="newTabBtn" class="navBtn plus" type="button" aria-label="New tab">＋</button>
       </div>
 
       <div id="tabsBar" class="tabsBar" role="tablist" aria-label="Open tabs"></div>
@@ -51,7 +55,7 @@
         <div class="hero">
           <div class="heroIcon">◉</div>
           <h2>Browse privately</h2>
-          <p>Your open tab list stays on this device so you can return to it after closing the Home Screen app.</p>
+          <p>Open tabs are restored on this device after you close and reopen the Home Screen app.</p>
         </div>
 
         <form id="startSearchForm" class="startSearch">
@@ -67,15 +71,33 @@
           <button type="submit">Search</button>
         </form>
 
+        <div class="engineRow">
+          <label for="searchEngine">Search engine</label>
+          <select id="searchEngine">
+            <option value="duckduckgo">DuckDuckGo</option>
+            <option value="brave">Brave Search</option>
+            <option value="startpage">Startpage</option>
+          </select>
+        </div>
+
         <div class="quickLinks">
           <button type="button" data-url="https://duckduckgo.com/">DuckDuckGo</button>
           <button type="button" data-url="https://www.wikipedia.org/">Wikipedia</button>
           <button type="button" data-url="https://github.com/">GitHub</button>
         </div>
 
+        <section class="bookmarkSection">
+          <div class="sectionHeading">
+            <h3>Bookmarks</h3>
+            <button id="manageBookmarksBtn" type="button">Manage</button>
+          </div>
+          <div id="bookmarksGrid" class="bookmarksGrid"></div>
+          <p id="emptyBookmarks" class="emptyState">Your saved pages will appear here.</p>
+        </section>
+
         <div class="privacyCard">
-          <strong>Private by design</strong>
-          <p>This app does not create a browsing-history database. It only stores the open-tab URLs needed to restore your session.</p>
+          <strong>Session privacy</strong>
+          <p>Only the information needed for open tabs, bookmarks, and your selected search engine is stored by this app on this device.</p>
         </div>
       </section>
 
@@ -98,16 +120,46 @@
         <span class="tabsIcon">▢</span>
         <span id="tabCount">1</span>
       </button>
+      <button id="fireBtn" class="fire" type="button">🔥 Fire</button>
       <button id="closeTabBtn" type="button">Close Tab</button>
-      <button id="eraseBtn" class="danger" type="button">Erase All</button>
     </footer>
   </main>
 
-  <div id="menu" class="menu hidden" role="dialog" aria-label="Browser menu">
-    <button id="duplicateTabBtn" type="button">Duplicate Current Tab</button>
-    <button id="closeOtherTabsBtn" type="button">Close Other Tabs</button>
-    <button id="openSafariBtn" type="button">Open Current Page in Safari</button>
-    <button id="cancelMenuBtn" type="button">Cancel</button>
+  <div id="tabsOverlay" class="overlay hidden" role="dialog" aria-label="All tabs">
+    <div class="sheet">
+      <div class="sheetHeader">
+        <div>
+          <h2>Open Tabs</h2>
+          <p id="tabsSummary">1 tab</p>
+        </div>
+        <button id="closeTabsOverlayBtn" class="roundBtn" type="button">×</button>
+      </div>
+      <div id="tabCards" class="tabCards"></div>
+      <button id="overlayNewTabBtn" class="primaryWide" type="button">＋ New Tab</button>
+    </div>
+  </div>
+
+  <div id="bookmarksOverlay" class="overlay hidden" role="dialog" aria-label="Bookmarks">
+    <div class="sheet">
+      <div class="sheetHeader">
+        <div>
+          <h2>Bookmarks</h2>
+          <p>Saved on this device</p>
+        </div>
+        <button id="closeBookmarksOverlayBtn" class="roundBtn" type="button">×</button>
+      </div>
+      <div id="bookmarkList" class="bookmarkList"></div>
+    </div>
+  </div>
+
+  <div id="menu" class="overlay hidden" role="dialog" aria-label="Browser menu">
+    <div class="actionSheet">
+      <button id="duplicateTabBtn" type="button">Duplicate Current Tab</button>
+      <button id="closeOtherTabsBtn" type="button">Close Other Tabs</button>
+      <button id="openSafariBtn" type="button">Open Current Page Outside App</button>
+      <button id="eraseAllBtn" class="dangerText" type="button">Erase App Data</button>
+      <button id="cancelMenuBtn" class="cancel" type="button">Cancel</button>
+    </div>
   </div>
 
   <script src="app.js"></script>
