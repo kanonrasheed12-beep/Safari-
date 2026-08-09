@@ -7,6 +7,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Private Browser" />
+  <meta name="format-detection" content="telephone=no" />
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="stylesheet" href="style.css" />
   <title>Private Browser</title>
@@ -15,37 +16,99 @@
   <main class="app">
     <header class="topbar">
       <div class="brand">
-        <div class="shield">◉</div>
+        <div class="shield" aria-hidden="true">◉</div>
         <div>
           <h1>Private Browser</h1>
-          <p>Safari-powered private launcher</p>
+          <p>Persistent private tab launcher</p>
         </div>
       </div>
-      <button id="clearBtn" class="ghost" type="button">Clear</button>
+      <button id="menuBtn" class="iconBtn" type="button" aria-label="Browser menu">•••</button>
     </header>
 
-    <section class="searchCard">
-      <form id="searchForm">
-        <label for="address">Search or enter website</label>
-        <div class="addressRow">
-          <input id="address" inputmode="url" autocomplete="off" autocapitalize="none"
-                 placeholder="example.com or search terms" />
+    <section class="browserShell" aria-label="Browser">
+      <div class="toolbar">
+        <button id="homeBtn" class="toolBtn" type="button" aria-label="Home">⌂</button>
+
+        <form id="searchForm" class="addressForm">
+          <input
+            id="address"
+            inputmode="url"
+            autocomplete="off"
+            autocapitalize="none"
+            spellcheck="false"
+            aria-label="Search or enter website"
+            placeholder="Search or enter website"
+          />
           <button class="go" type="submit">Go</button>
-        </div>
-      </form>
+        </form>
 
-      <div class="actions">
-        <button id="privateSafariBtn" type="button">Open Safari Private Browsing</button>
-        <button id="duckBtn" class="secondary" type="button">DuckDuckGo</button>
+        <button id="newTabBtn" class="toolBtn plus" type="button" aria-label="New tab">＋</button>
       </div>
+
+      <div id="tabsBar" class="tabsBar" role="tablist" aria-label="Open tabs"></div>
+
+      <section id="startPage" class="startPage">
+        <div class="hero">
+          <div class="heroIcon">◉</div>
+          <h2>Browse privately</h2>
+          <p>Your open tab list stays on this device so you can return to it after closing the Home Screen app.</p>
+        </div>
+
+        <form id="startSearchForm" class="startSearch">
+          <input
+            id="startAddress"
+            inputmode="url"
+            autocomplete="off"
+            autocapitalize="none"
+            spellcheck="false"
+            aria-label="Search privately"
+            placeholder="Search the web privately"
+          />
+          <button type="submit">Search</button>
+        </form>
+
+        <div class="quickLinks">
+          <button type="button" data-url="https://duckduckgo.com/">DuckDuckGo</button>
+          <button type="button" data-url="https://www.wikipedia.org/">Wikipedia</button>
+          <button type="button" data-url="https://github.com/">GitHub</button>
+        </div>
+
+        <div class="privacyCard">
+          <strong>Private by design</strong>
+          <p>This app does not create a browsing-history database. It only stores the open-tab URLs needed to restore your session.</p>
+        </div>
+      </section>
+
+      <section id="viewer" class="viewer hidden">
+        <div id="viewerNotice" class="viewerNotice">
+          <span id="viewerStatus">Loading tab…</span>
+          <button id="openDirectBtn" type="button">Open page</button>
+        </div>
+        <iframe
+          id="webFrame"
+          title="Web page"
+          referrerpolicy="no-referrer"
+          sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
+        ></iframe>
+      </section>
     </section>
 
-    <section class="info">
-      <h2>Privacy notes</h2>
-      <p>This app does not save your searches or browsing history itself. Websites you open are handled by Safari.</p>
-      <p>For the strongest local privacy, tap <strong>Open Safari Private Browsing</strong>, then browse from Safari's Private tab group.</p>
-    </section>
+    <footer class="bottomBar">
+      <button id="tabsBtn" type="button">
+        <span class="tabsIcon">▢</span>
+        <span id="tabCount">1</span>
+      </button>
+      <button id="closeTabBtn" type="button">Close Tab</button>
+      <button id="eraseBtn" class="danger" type="button">Erase All</button>
+    </footer>
   </main>
+
+  <div id="menu" class="menu hidden" role="dialog" aria-label="Browser menu">
+    <button id="duplicateTabBtn" type="button">Duplicate Current Tab</button>
+    <button id="closeOtherTabsBtn" type="button">Close Other Tabs</button>
+    <button id="openSafariBtn" type="button">Open Current Page in Safari</button>
+    <button id="cancelMenuBtn" type="button">Cancel</button>
+  </div>
 
   <script src="app.js"></script>
 </body>
