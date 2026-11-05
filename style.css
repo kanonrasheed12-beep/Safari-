@@ -123,15 +123,21 @@ button:disabled{opacity:.3}
   .navRow .star{display:none}
 }
 
-/* V4: no iframe white-screen viewer */
-.savedViewer{min-height:420px;background:#101018;display:flex;align-items:center;justify-content:center;padding:28px 18px}
+/* V4.1: compact saved-link card. Actual websites open outside this PWA. */
+.savedViewer{min-height:0;background:#0e0e15;display:flex;align-items:flex-start;justify-content:center;padding:22px 14px 26px}
 .savedViewer.hidden{display:none}
-.savedSiteCard{max-width:530px;width:100%;border:1px solid #383047;border-radius:22px;background:#191722;padding:30px 22px;text-align:center;color:#f5f3fa}
-.savedSiteIcon{display:inline-grid;place-items:center;width:64px;height:64px;background:#873ff0;border-radius:18px;font-size:32px;margin-bottom:15px}
-.savedSiteCard h2{font-size:24px;overflow-wrap:anywhere;margin:0 0 10px}
-.savedSiteCard p{color:#b5afc2;line-height:1.5}
-.savedSiteUrl{font-size:13px;overflow-wrap:anywhere;color:#bca3ed!important}
-.savedSiteOpen{border:0;border-radius:14px;background:#903ef2;color:white;font-weight:700;padding:15px 22px;font-size:16px;width:100%;margin:12px 0;cursor:pointer}
-.savedSiteHint{font-size:12px}
+.savedSiteCard{max-width:560px;width:100%;min-width:0;border:1px solid #463352;border-radius:20px;background:linear-gradient(145deg,#241c30 0%,#191722 68%,#16151e 100%);padding:20px;color:#f5f3fa;box-shadow:0 14px 35px #0003}
+.savedSiteHeading{display:flex;align-items:center;gap:14px;min-width:0;padding-bottom:18px}
+.savedSiteIcon{display:grid;flex:0 0 54px;place-items:center;width:54px;height:54px;background:linear-gradient(140deg,#7540e8,#ac3df4);border-radius:16px;font-size:27px;box-shadow:0 8px 22px #7d3ee02c}
+.savedSiteDetails{min-width:0;flex:1}
+.savedSiteOverline{display:flex;align-items:center;gap:7px;margin-bottom:5px;color:#bba5dc;font-size:10px;font-weight:750;letter-spacing:.09em;text-transform:uppercase}
+.savedSiteDot{width:6px;height:6px;background:#b585ff;border-radius:50%}
+.savedSiteCard h2{font-size:20px;letter-spacing:-.025em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin:0 0 5px}
+.savedSiteUrl{margin:0;color:#b3a9c6;font-size:13px;line-height:1.4;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.savedSiteOpen{border:0;border-radius:12px;background:linear-gradient(125deg,#8547f4,#a53eef);color:#fff;display:flex;align-items:center;justify-content:center;gap:10px;font-weight:750;padding:13px 16px;font-size:15px;min-height:48px;width:100%;cursor:pointer;box-shadow:0 6px 18px #8440df26}
+.savedSiteOpen:active{transform:scale(.99)}
+.savedSiteOpen:focus-visible{outline:3px solid #d8bcff;outline-offset:3px}
+.actionArrow{font-size:20px;font-weight:500;line-height:1}
+.savedSiteHint{font-size:12px;line-height:1.5;text-align:center;color:#a5a0b1;margin:12px 0 0}
 .srOnly{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
-@media(max-width:430px){.navRow .star{display:flex}}
+@media(max-width:430px){.navRow .star{display:flex}.savedSiteCard{padding:16px}.savedViewer{padding:18px 12px 22px}.savedSiteHeading{gap:12px}.savedSiteIcon{width:48px;height:48px;flex-basis:48px;border-radius:14px}.savedSiteCard h2{font-size:19px}}

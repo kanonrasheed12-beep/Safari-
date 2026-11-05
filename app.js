@@ -306,7 +306,9 @@ function renderActiveTab() {
     viewer.classList.remove('hidden');
     viewerStatus.textContent = `Saved tab: ${safeHost(tab.url)}. The website opens in a separate browser view.`;
     $('savedSiteName').textContent = tab.title || safeHost(tab.url);
-    $('savedSiteUrl').textContent = tab.url;
+    $('savedSiteUrl').textContent = safeHost(tab.url);
+    $('savedSiteUrl').title = tab.url;
+    $('savedSiteUrl').setAttribute('aria-label', `Full website address: ${tab.url}`);
   }
   renderTabs();
   renderNavState();

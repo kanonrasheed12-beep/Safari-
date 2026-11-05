@@ -101,15 +101,21 @@
         </div>
       </section>
 
-      <section id="viewer" class="viewer savedViewer hidden">
+      <section id="viewer" class="viewer savedViewer hidden" aria-label="Saved website">
         <div class="savedSiteCard">
-          <div class="savedSiteIcon" aria-hidden="true">↗</div>
-          <h2 id="savedSiteName">Saved website</h2>
-          <p id="savedSiteUrl" class="savedSiteUrl"></p>
-          <p>This tab remembers the website link. The actual page opens in your iPhone's browser view, since websites cannot all be displayed inside a Home Screen web app.</p>
-          <button id="openDirectBtn" type="button" class="savedSiteOpen">Open website again ↗</button>
-          <p class="savedSiteHint">Switch tabs here, or return from the browser view to continue.</p>
-          <span id="viewerStatus" class="srOnly"></span>
+          <div class="savedSiteHeading">
+            <div class="savedSiteIcon" aria-hidden="true">↗</div>
+            <div class="savedSiteDetails">
+              <span class="savedSiteOverline"><span class="savedSiteDot" aria-hidden="true"></span> Saved tab</span>
+              <h2 id="savedSiteName">Saved website</h2>
+              <p id="savedSiteUrl" class="savedSiteUrl"></p>
+            </div>
+          </div>
+          <button id="openDirectBtn" type="button" class="savedSiteOpen">
+            <span>Reopen website</span><span class="actionArrow" aria-hidden="true">↗</span>
+          </button>
+          <p class="savedSiteHint">Opens in a separate browser view. This tab saves the link.</p>
+          <span id="viewerStatus" class="srOnly" role="status"></span>
           <iframe id="webFrame" class="hidden" title="Unused legacy viewer"></iframe>
         </div>
       </section>
