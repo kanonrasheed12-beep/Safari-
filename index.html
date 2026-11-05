@@ -9,7 +9,7 @@
   <meta name="apple-mobile-web-app-title" content="Private Browser" />
   <meta name="format-detection" content="telephone=no" />
   <link rel="manifest" href="manifest.webmanifest" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css?v=4.2" />
   <title>Private Browser</title>
 </head>
 <body>
@@ -97,7 +97,7 @@
 
         <div class="privacyCard">
           <strong>Session privacy</strong>
-          <p>Only the information needed for open tabs, bookmarks, and your selected search engine is stored by this app on this device.</p>
+          <p>This app saves tab links, in-app navigation history, bookmarks, and your search-engine choice on this device. Websites open separately; the Fire button cannot clear Safari history or cookies.</p>
         </div>
       </section>
 
@@ -106,7 +106,7 @@
           <div class="savedSiteHeading">
             <div class="savedSiteIcon" aria-hidden="true">↗</div>
             <div class="savedSiteDetails">
-              <span class="savedSiteOverline"><span class="savedSiteDot" aria-hidden="true"></span> Saved tab</span>
+              <span class="savedSiteOverline"><span class="savedSiteDot" aria-hidden="true"></span><span id="savedSiteKind">Saved website</span></span>
               <h2 id="savedSiteName">Saved website</h2>
               <p id="savedSiteUrl" class="savedSiteUrl"></p>
             </div>
@@ -114,7 +114,7 @@
           <button id="openDirectBtn" type="button" class="savedSiteOpen">
             <span>Reopen website</span><span class="actionArrow" aria-hidden="true">↗</span>
           </button>
-          <p class="savedSiteHint">Opens in a separate browser view. This tab saves the link.</p>
+          <p class="savedSiteHint">Opens separately · Your saved tab stays here.</p>
           <span id="viewerStatus" class="srOnly" role="status"></span>
           <iframe id="webFrame" class="hidden" title="Unused legacy viewer"></iframe>
         </div>
@@ -168,6 +168,6 @@
     </div>
   </div>
 
-  <script src="app.js"></script>
+  <script src="app.js?v=4.2"></script>
 </body>
 </html>

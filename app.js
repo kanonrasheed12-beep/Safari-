@@ -194,6 +194,38 @@ function titleForUrl(url) {
   return queryTitle(url) || safeHost(url).slice(0, 32) || 'Web Page';
 }
 
+// Search links and direct destinations are different kinds of saved tabs.
+// Identify only known engine search routes; do not guess based on arbitrary URLs.
+function searchInfo(url) {
+  try {
+    const parsed = new URL(url);
+    const hostname = parsed.hostname.toLowerCase().replace(/^www\./, '');
+    const path = parsed.pathname;
+    if (hostname === 'duckduckgo.com' && parsed.searchParams.get('q')) {
+      return { engine: 'DuckDuckGo', query: parsed.searchParams.get('q') };
+    }
+    if (hostname === 'search.brave.com' && path === '/search' && parsed.searchParams.get('q')) {
+      return { engine: 'Brave', query: parsed.searchParams.get('q') };
+    }
+    if (hostname === 'startpage.com' && path.includes('/search') && parsed.searchParams.get('query')) {
+      return { engine: 'Startpage', query: parsed.searchParams.get('query') };
+    }
+  } catch (_) {}
+  return null;
+}
+
+function tabDisplay(tab) {
+  if (!tab?.url) return { title: 'New Tab', label: 'New Tab', kind: 'New tab', detail: 'Start page' };
+  const search = searchInfo(tab.url);
+  const title = tab.title || titleForUrl(tab.url);
+  return {
+    title,
+    label: search ? `${title} · Search` : title,
+    kind: search ? 'Saved search' : 'Saved website',
+    detail: search ? `${search.engine} Search · ${safeHost(tab.url)}` : safeHost(tab.url)
+  };
+}
+
 function currentIsBookmarked() {
   const tab = getActiveTab();
   return Boolean(tab?.url && bookmarks.some(b => b.url === tab.url));
@@ -236,9 +268,10 @@ function renderTabs() {
 
     const label = document.createElement('span');
     label.className = 'tabLabel';
-    label.textContent = tab.title || 'New Tab';
+    label.textContent = tabDisplay(tab).label;
 
     select.append(makeSiteIcon(tab.url), label);
+    select.setAttribute('aria-label', `Switch to ${tabDisplay(tab).label}`);
     select.addEventListener('click', () => activateTab(tab.id));
 
     const close = document.createElement('button');
@@ -256,6 +289,15 @@ function renderTabs() {
   });
 
   tabCount.textContent = String(tabs.length);
+
+  // Ensure selected tabs do not remain clipped offscreen on narrow iPhones.
+  const active = tabsBar.querySelector('.tab.active');
+  if (active) {
+    const visible = tabsBar.getBoundingClientRect();
+    const rect = active.getBoundingClientRect();
+    if (rect.left < visible.left) tabsBar.scrollLeft -= visible.left - rect.left + 8;
+    if (rect.right > visible.right) tabsBar.scrollLeft += rect.right - visible.right + 8;
+  }
 }
 
 function renderNavState() {
@@ -304,9 +346,11 @@ function renderActiveTab() {
   } else {
     startPage.classList.add('hidden');
     viewer.classList.remove('hidden');
-    viewerStatus.textContent = `Saved tab: ${safeHost(tab.url)}. The website opens in a separate browser view.`;
-    $('savedSiteName').textContent = tab.title || safeHost(tab.url);
-    $('savedSiteUrl').textContent = safeHost(tab.url);
+    const display = tabDisplay(tab);
+    viewerStatus.textContent = `${display.kind}: ${display.detail}. The link opens in a separate browser view.`;
+    $('savedSiteKind').textContent = display.kind;
+    $('savedSiteName').textContent = display.title;
+    $('savedSiteUrl').textContent = display.detail;
     $('savedSiteUrl').title = tab.url;
     $('savedSiteUrl').setAttribute('aria-label', `Full website address: ${tab.url}`);
   }
@@ -444,7 +488,7 @@ function toggleBookmark() {
 }
 
 function fireSession() {
-  const confirmed = confirm('Close every open tab and erase this browser session? Bookmarks and search-engine choice will be kept.');
+  const confirmed = confirm('Clear all saved tabs in Private Browser? Bookmarks and search engine stay saved. This does not clear Safari or external website data.');
   if (!confirmed) return;
 
   tabs = [newTab()];
@@ -520,10 +564,11 @@ function renderTabCards() {
     details.className = 'tabCardDetails';
 
     const title = document.createElement('strong');
-    title.textContent = tab.title || 'New Tab';
+    title.textContent = tabDisplay(tab).label;
 
     const url = document.createElement('small');
-    url.textContent = tab.url || 'Start page';
+    url.textContent = tabDisplay(tab).detail;
+    url.title = tab.url || 'New tab';
 
     details.append(title, url);
     preview.append(fakeBar, previewBody, details);
