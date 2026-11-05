@@ -16,7 +16,7 @@ const searchEngine = $('searchEngine');
 const tabsBar = $('tabsBar');
 const startPage = $('startPage');
 const viewer = $('viewer');
-const webFrame = $('webFrame');
+const webFrame = $('webFrame'); // Legacy element: V4 never embeds third-party sites.
 const viewerStatus = $('viewerStatus');
 const tabCount = $('tabCount');
 
@@ -293,28 +293,30 @@ function renderBookmarks() {
   });
 }
 
-function renderActiveTab({ reloadFrame = true } = {}) {
+function renderActiveTab() {
   const tab = getActiveTab();
   if (!tab) return;
-
   address.value = tab.url || '';
-
   if (!tab.url) {
     startPage.classList.remove('hidden');
     viewer.classList.add('hidden');
-    webFrame.removeAttribute('src');
     startAddress.value = '';
   } else {
     startPage.classList.add('hidden');
     viewer.classList.remove('hidden');
-    viewerStatus.textContent =
-      `Viewing ${safeHost(tab.url)}. Some sites block embedded viewing; use Open page if needed.`;
-    if (reloadFrame) webFrame.src = tab.url;
+    viewerStatus.textContent = `Saved tab: ${safeHost(tab.url)}. The website opens in a separate browser view.`;
+    $('savedSiteName').textContent = tab.title || safeHost(tab.url);
+    $('savedSiteUrl').textContent = tab.url;
   }
-
   renderTabs();
   renderNavState();
   renderBookmarks();
+}
+
+// Only call from direct user actions; iOS may block unsolicited windows.
+function openWebsite(url) {
+  if (!url) return;
+  window.open(url, '_blank', 'noopener,noreferrer');
 }
 
 function activateTab(id) {
@@ -332,7 +334,8 @@ function addTab(url = '') {
   saveState();
   renderActiveTab();
   hideOverlay(tabsOverlay);
-  if (!url) setTimeout(() => startAddress.focus(), 0);
+  if (url) openWebsite(url);
+  else setTimeout(() => startAddress.focus(), 0);
 }
 
 function pushHistory(tab, url) {
@@ -363,6 +366,7 @@ function navigateCurrent(rawValue) {
   applyTabUrl(tab, url);
   saveState();
   renderActiveTab();
+  openWebsite(url);
 }
 
 function goHistory(delta) {
@@ -378,15 +382,12 @@ function goHistory(delta) {
   tab.updatedAt = Date.now();
   saveState();
   renderActiveTab();
+  openWebsite(tab.url);
 }
 
 function refreshCurrent() {
   const tab = getActiveTab();
-  if (!tab?.url) return;
-  webFrame.src = 'about:blank';
-  requestAnimationFrame(() => {
-    webFrame.src = tab.url;
-  });
+  if (tab?.url) openWebsite(tab.url);
 }
 
 function goHome() {
@@ -453,7 +454,7 @@ function fireSession() {
     localStorage.removeItem(LEGACY_ACTIVE_KEY);
   } catch (_) {}
 
-  webFrame.src = 'about:blank';
+  // No embedded page or third-party browser data to clear.
   saveState();
   renderActiveTab();
 }
@@ -477,7 +478,7 @@ function eraseAllAppData() {
   bookmarks = [];
   selectedEngine = 'duckduckgo';
   searchEngine.value = selectedEngine;
-  webFrame.src = 'about:blank';
+  // No embedded page or third-party browser data to clear.
   saveState();
   hideOverlay(menu);
   renderActiveTab();
@@ -486,7 +487,7 @@ function eraseAllAppData() {
 function openCurrentDirect() {
   const tab = getActiveTab();
   if (!tab?.url) return;
-  window.open(tab.url, '_blank', 'noopener,noreferrer');
+  openWebsite(tab.url);
 }
 
 function renderTabCards() {

@@ -19,7 +19,7 @@
         <div class="shield" aria-hidden="true">◉</div>
         <div>
           <h1>Private Browser</h1>
-          <p>Persistent tab browser</p>
+          <p>Saved-tab web launcher</p>
         </div>
       </div>
       <button id="menuBtn" class="iconBtn" type="button" aria-label="Browser menu">•••</button>
@@ -101,17 +101,17 @@
         </div>
       </section>
 
-      <section id="viewer" class="viewer hidden">
-        <div id="viewerNotice" class="viewerNotice">
-          <span id="viewerStatus">Loading tab…</span>
-          <button id="openDirectBtn" type="button">Open page</button>
+      <section id="viewer" class="viewer savedViewer hidden">
+        <div class="savedSiteCard">
+          <div class="savedSiteIcon" aria-hidden="true">↗</div>
+          <h2 id="savedSiteName">Saved website</h2>
+          <p id="savedSiteUrl" class="savedSiteUrl"></p>
+          <p>This tab remembers the website link. The actual page opens in your iPhone's browser view, since websites cannot all be displayed inside a Home Screen web app.</p>
+          <button id="openDirectBtn" type="button" class="savedSiteOpen">Open website again ↗</button>
+          <p class="savedSiteHint">Switch tabs here, or return from the browser view to continue.</p>
+          <span id="viewerStatus" class="srOnly"></span>
+          <iframe id="webFrame" class="hidden" title="Unused legacy viewer"></iframe>
         </div>
-        <iframe
-          id="webFrame"
-          title="Web page"
-          referrerpolicy="no-referrer"
-          sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
-        ></iframe>
       </section>
     </section>
 
